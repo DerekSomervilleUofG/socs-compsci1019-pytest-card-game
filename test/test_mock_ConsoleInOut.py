@@ -4,7 +4,7 @@ from card_game.communication.ConsoleInOut import *
 
 class test_mock_ConsoleInOut(unittest.TestCase):
 
-    def test_get_input_string(self, mock_input):
+    def test_get_input_string(self):
         pass
 
     def test_get_input_integer(self):
