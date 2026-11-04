@@ -11,10 +11,8 @@ def create_csv_reader(config_path: str):
 
 def get_csv_rows(file_name: str) -> List[List[str]]:
     csv_data = []
-    path = os.getcwd()
-    path = path.replace("\\","/")
     try:
-        reader = create_csv_reader(path + "/" + file_name)
+        reader = create_csv_reader(file_name)
         for row in reader:
             csv_data.append(row.split(","))
         reader.close()

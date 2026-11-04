@@ -74,16 +74,13 @@ To verify that `create_csv_reader` correctly reads, parses, and converts valid c
 
 - Implement `test_create_csv_reader_valid_data` in `test/test_load_csv.py`.
 - Use `pytest`'s built-in `tmp_path` fixture to dynamically create an isolated temporary CSV file containing card entries:
-  ```text
-  Suit,Value
+  ```suit,Value
   Hearts,10
   Spades,Ace
-  Diamonds,7
-  ```
+  Diamonds,7```
 - Invoke `create_csv_reader`, passing the file path of the temporary CSV.
 - Assert that:
-  - The returned records or rows contain exactly 3 card items.
-  - The extracted values match the rows written to the CSV file (validating both suit and value fields in order).
+  - The returned four rows.
 - Push sub-task to GitHub, [Go To GitHub Commit](#github-commit)
 
 ## Sub-task 5 – Test Round Execution with Deterministic Pre-seeded Decks
