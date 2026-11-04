@@ -6,7 +6,7 @@ The application plays cards with a standard 52 card deck, with suits hearts, spa
 * Twenty One [https://en.wikipedia.org/wiki/Blackjack](https://en.wikipedia.org/wiki/Blackjack) and [Example Twenty One](https://www.youtube.com/watch?v=zuZqw12MrVI)
 
 
-Mocking allows you to test the `CardGame` application completely. It allows you mock user input from the console, as well as files. For this task, you are required to implement several unit tests using the module `unittest.mock` (from the `unittest` library) to mock user input and files.
+Unit Testing allows you to test the `CardGame` application completely. For this task, you are required to implement several unit tests using the module `pytest`.
 
 # Instructions
 
@@ -23,20 +23,7 @@ Mocking allows you to test the `CardGame` application completely. It allows you 
 
 Remember to read and implement the sub-tasks one at a time, following the given order. Do not move on to the next sub-task until the current one has been completed. Implement the required unit tests by working in the `test/test_mock_ConsoleInOut.py`, `test/test_mock_Game.py`, `test/test_mock_LoadCSV.py` & `test/test_mock_Deck.py` files. 
 
-# Sub-task 1 – Verify Exception on Non-Existent File
-
-To verify exception handling when attempting to read an invalid file.
-
-### Requirement
-
-- Implement unit test `test_create_csv_reader_invalid_path` in `test/test_load_csv.py`.
-- Call `create_csv_reader` with an invalid or non-existent file path (e.g., `"does_not_exist.csv"`).
-- Use `pytest.raises(IOError)` to verify that an `IOError` is properly re-raised.
-- Use `capsys` to assert that `"An error occurred."` is printed to stdout.
-- Push sub task to GitHub, [Go To GitHub Commit](#github-commit)
-
-
-## Sub-task 2 – Test Scoring Hand in TwentyOne
+## Sub-task 1 – Test Scoring Hand in TwentyOne
 
 To verify the hand scoring logic in `TwentyOne.py`, including ace adjustment and bust detection.
 
@@ -49,6 +36,18 @@ To verify the hand scoring logic in `TwentyOne.py`, including ace adjustment and
   3. **Ace adjusted to low value (1)**: When total score exceeds 21, the ace score is reduced to prevent busting (e.g., Ace + 9 + 5 = 15).
   4. **Bust hand**: When the score exceeds 21 (even after ace adjustment, or with no ace), the returned score must be `0`.
 - Mock or stub `get_card_score`, `get_face_card_score`, and `ace` where appropriate to isolate the logic of `score_hand`.
+- Push sub task to GitHub, [Go To GitHub Commit](#github-commit)
+
+# Sub-task 2 – Verify Exception on Non-Existent File
+
+To verify exception handling when attempting to read an invalid file.
+
+### Requirement
+
+- Implement unit test `test_create_csv_reader_invalid_path` in `test/test_load_csv.py`.
+- Call `create_csv_reader` with an invalid or non-existent file path (e.g., `"does_not_exist.csv"`).
+- Use `pytest.raises(IOError)` to verify that an `IOError` is properly re-raised.
+- Use `capsys` to assert that `"An error occurred."` is printed to stdout.
 - Push sub task to GitHub, [Go To GitHub Commit](#github-commit)
 
 ## Sub-task 3 – Test Parametrized Hand Scoring with Edge Cases
