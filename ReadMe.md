@@ -86,23 +86,21 @@ To verify that `create_csv_reader` correctly reads, parses, and converts valid c
   - The extracted values match the rows written to the CSV file (validating both suit and value fields in order).
 - Push sub-task to GitHub, [Go To GitHub Commit](#github-commit)
 
-## Sub-task 5 – Test Game Lifecycle and Winner Flagging
+## Sub-task 5 – Test Round Execution with Deterministic Pre-seeded Decks
 
-To verify that `play()` invokes the full game sequence and flags the winner dictionary.
+To verify complete round execution and state transitions end-to-end without mocking internal helpers, relying instead on predictable input state.
 
 ### Requirement
 
-- Implement `test_play_orchestrates_lifecycle_and_flags_winner` in `test/test_twenty_one.py`.
-- Mock the lifecycle helpers called by `play()`:
-  - `initiate(no_of_cards, override)` -> returns a dummy deck.
-  - `play_a_round(deck)`.
-  - `reset_players()`.
-  - `determine_winner()` -> returns a mutable mock player dictionary `{"name": "Dealer", WINNER: False}`.
-  - `show_players()`.
-- Assert that:
-  - Each lifecycle step executes in the expected sequence.
-  - The winner dictionary returned by `determine_winner()` has its `WINNER` field updated to `True`.
-- Push sub task to GitHub, [Go To GitHub Commit](#github-commit)
+* Implement `test_play_a_round_deterministic_deck` in `test/test_twenty_one.py`.
+* Construct a deterministic, pre-arranged deck (a stacked sequence of specific card tuples or objects) designed to lead to a completely predictable outcome without interactive prompts (e.g., automated computer players standing at or above 17).
+* Pass the deterministic deck and initialised players into `play_a_round(deck)`.
+* Assert that:
+  * Cards are drawn and popped from the deck in the exact expected sequential order.
+  * The remaining deck size decreases by the exact total number of cards dealt across all turns.
+  * Each player's hand contains the exact sequence of cards dealt to them.
+  * Computed player hand totals match the expected mathematical sum of the pre-seeded cards.
+* Push sub-task to GitHub, [Go To GitHub Commit](#github-commit)
 
 
 # Run Tests
