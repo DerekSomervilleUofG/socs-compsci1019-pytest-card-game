@@ -66,22 +66,25 @@ To verify multiple card combinations and edge cases efficiently in `score_hand` 
 - Assert the expected return value for each tuple in the dataset.
 - Push sub task to GitHub, [Go To GitHub Commit](#github-commit)
 
-## Sub-task 4 – Test Player Routing in Round Execution
+## Sub-task 4 – Verify CSV Loading with Temporary Files (`tmp_path`)
 
-To verify conditional dispatching in `play_a_round` based on competitor type.
+To verify that `create_csv_reader` correctly reads, parses, and converts valid card data from disk without modifying real files or relying on external dependencies.
 
 ### Requirement
 
-- Implement `test_play_a_round_dispatches_by_player_type` in `test/test_twenty_one.py`.
-- Configure the global or module-level `players` list with two mock players:
-  - One with `COMPETITOR_TYPE = USER`.
-  - One with `COMPETITOR_TYPE = COMPUTER` (or any non-USER identifier).
-- Mock both `user_plays` and `computer_plays` using `unittest.mock.Mock`.
-- Execute `play_a_round(deck)`.
+- Implement `test_create_csv_reader_valid_data` in `test/test_load_csv.py`.
+- Use `pytest`'s built-in `tmp_path` fixture to dynamically create an isolated temporary CSV file containing card entries:
+  ```text
+  Suit,Value
+  Hearts,10
+  Spades,Ace
+  Diamonds,7
+  ```
+- Invoke `create_csv_reader`, passing the file path of the temporary CSV.
 - Assert that:
-  - `user_plays` is called exactly once with the human player and the deck.
-  - `computer_plays` is called exactly once with the AI player and the deck.
-- Push sub task to GitHub, [Go To GitHub Commit](#github-commit)
+  - The returned records or rows contain exactly 3 card items.
+  - The extracted values match the rows written to the CSV file (validating both suit and value fields in order).
+- Push sub-task to GitHub, [Go To GitHub Commit](#github-commit)
 
 ## Sub-task 5 – Test Game Lifecycle and Winner Flagging
 
