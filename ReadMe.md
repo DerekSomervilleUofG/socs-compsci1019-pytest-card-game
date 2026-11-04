@@ -83,22 +83,19 @@ To verify that `create_csv_reader` correctly reads, parses, and converts valid c
   - The returned four rows.
 - Push sub-task to GitHub, [Go To GitHub Commit](#github-commit)
 
-## Sub-task 5 – Test Round Execution with Deterministic Pre-seeded Decks
+## Sub-task 5 – Verify Winner Flagging in `play()`
 
-To verify complete round execution and state transitions end-to-end without mocking internal helpers, relying instead on predictable input state.
+To verify that `play()` correctly marks the identified winning player dictionary with `WINNER = True`.
 
 ### Requirement
 
-* Implement `test_play_a_round_deterministic_deck` in `test/test_twenty_one.py`.
-* Construct a deterministic, pre-arranged deck (a stacked sequence of specific card tuples or objects) designed to lead to a completely predictable outcome without interactive prompts (e.g., automated computer players standing at or above 17).
-* Pass the deterministic deck and initialised players into `play_a_round(deck)`.
-* Assert that:
-  * Cards are drawn and popped from the deck in the exact expected sequential order.
-  * The remaining deck size decreases by the exact total number of cards dealt across all turns.
-  * Each player's hand contains the exact sequence of cards dealt to them.
-  * Computed player hand totals match the expected mathematical sum of the pre-seeded cards.
-* Push sub-task to GitHub, [Go To GitHub Commit](#github-commit)
-
+- Implement `test_play_flags_winner` in `test/test_twenty_one.py`.
+- Use `monkeypatch` to stub `initiate`, `play_a_round`, `reset_players`, and `show_players` as empty no-op functions (`lambda *args, **kwargs: None`).
+- Construct a mock winner player dictionary: `player = {"name": "Bot", WINNER: False}`.
+- Use `monkeypatch.setattr(twenty_one, "determine_winner", lambda: player)` so `play()` receives your test player.
+- Call `twenty_one.play()`.
+- Assert that `player[WINNER]` has been mutated to `True`.
+- Push sub-task to GitHub, [Go To GitHub Commit](#github-commit)
 
 # Run Tests
 
